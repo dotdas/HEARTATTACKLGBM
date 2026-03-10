@@ -38,7 +38,28 @@ with st.form("prediction_form"):
     cols = st.columns(2)
     for i, feature in enumerate(features):
         with cols[i % 2]:
-            user_input[feature] = st.number_input(f"{feature}", value=float(medians[feature]))
+            if feature == 'age':
+                # Constraint: Umur harus bilangan bulat, min 0, max 120, step 1
+                user_input[feature] = st.number_input(
+                    f"{feature}", 
+                    min_value=0, 
+                    max_value=120, 
+                    value=int(medians[feature]), 
+                    step=1
+                )
+            elif feature == 'sex':
+                # Constraint: Dropdown biner (0 atau 1)
+                user_input[feature] = st.selectbox(
+                    f"{feature} (0 = Female, 1 = Male)", 
+                    options=[0, 1], 
+                    index=int(medians[feature])
+                )
+            else:
+                # Default untuk variabel lain yang masih butuh desimal
+                user_input[feature] = st.number_input(
+                    f"{feature}", 
+                    value=float(medians[feature])
+                )
     
     submit_button = st.form_submit_button(label="Prediksi Risiko")
 
@@ -58,3 +79,4 @@ if submit_button:
         st.error(f"⚠️ **Tinggi Risiko Serangan Jantung** (Probabilitas: {probability:.2%})")
     else:
         st.success(f"✅ **Rendah Risiko Serangan Jantung** (Probabilitas: {probability:.2%})")
+
