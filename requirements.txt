@@ -2,6 +2,5 @@ pandas
 numpy
 scikit-learn
 lightgbm
-mlflow
 joblib
 streamlit
