@@ -21,7 +21,12 @@ heart-attack-prediction/
 ├── Exploration.ipynb          # Jupyter notebook for extensive data analysis and model comparison.
 ├── requirements.txt           # List of Python dependencies.
 ├── README.md                  # This file.
-└── Heart Attack Data Set.csv  # The dataset being worked on  
+├── app.py                     # Streamlit web application script.
+├── model.pkl                  # Extracted LightGBM model for deployment.
+├── scaler.pkl                 # Fitted StandardScaler for deployment.
+├── medians.pkl                # Median values for missing data handling.
+└── Heart Attack Data Set.csv  # The dataset being worked on
+
 ```
 
 ## Setup and Installation
@@ -53,6 +58,15 @@ This command will sequentially execute the following steps:
 2.  **Preprocessing**: Cleans the data, handles missing values, scales features, and splits it into training and testing sets.
 3.  **Training**: Trains a LightGBM model on the processed data, logging parameters and artifacts to MLflow.
 4.  **Evaluation**: Evaluates the model on the test set. If accuracy is **≥ 80%**, the model is approved; otherwise, it is rejected.
+
+## Running the Web App (Streamlit)
+
+This project includes an interactive web interface to predict heart attack risk using the trained LightGBM model. 
+To run the Streamlit app locally, execute:
+
+```bash
+streamlit run app.py
+```
 
 ## Model Details
 
@@ -108,4 +122,7 @@ lightgbm
 matplotlib
 seaborn
 jupyter
+joblib
+streamlit>=1.30.0
+altair<5.0.0
 ```
